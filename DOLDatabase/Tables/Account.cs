@@ -43,7 +43,7 @@ namespace DOL
 			private string m_language;
 			private string m_lastClientVersion;
 			private bool m_isMuted;
-            private bool m_isSudo; /// Added attribute to see if non-gm accounts can access gm commands
+            private bool m_sudo; /// Added attribute to see if non-gm accounts can access gm commands
 			
 			/// <summary>
 			/// Create account row in DB
@@ -224,8 +224,8 @@ namespace DOL
             [DataElement(AllowDbNull = true)]
             public bool IsSudo
             {
-                get { return m_isSudo; }
-                set { Dirty = true;  m_isSudo = value; }
+                get { return m_sudo; }
+                set { Dirty = true;  m_sudo = value; }
             }
 
 			/// <summary>

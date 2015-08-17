@@ -8,20 +8,79 @@ using DOL.GS.PacketHandler;
 
 namespace DOL.GS.Commands
 {
-    class SudoCommandHandler
-    {
-        [CmdAttribute(
+    [CmdAttribute(
         "&sudo",
         ePrivLevel.Player,
-        "Sudoer accounts may use GM commands",
-        "/sudo <command>")]
-        public class VersionCommandHandler : AbstractCommandHandler, ICommandHandler
+        "Sudoer accounts may use GM commands.",
+        "/sudo player - Lists available player commands.",
+        "/sudo speed <number> - Sets player's run speed.")]
+    public class SudoCommandHandler : AbstractCommandHandler, ICommandHandler
+    {
+
+        public void OnCommand(GameClient client, string[] args)
         {
-            public void OnCommand(GameClient client, string[] args)
+            if (client.Account.IsSudo)
             {
-                AssemblyName an = Assembly.GetAssembly(typeof(GameServer)).GetName();
-                client.Out.SendMessage("Sudo Command Stub" + an.Version, eChatType.CT_System, eChatLoc.CL_SystemWindow);
+                if (args.Length == 1)
+                {
+                    DisplaySyntax(client);
+                    return;
+                }
+
+                client.Account.PrivLevel = 2;
+
+                switch (args[1])
+                {
+                    case "player":
+                        {
+                            List<string> tmp = new List<string>(args);
+                            tmp.RemoveAt(0);
+                            string[] newArgs = tmp.ToArray();
+                            PlayerCommandHandler sudoPlayer = new PlayerCommandHandler();
+                            sudoPlayer.OnCommand(client, newArgs);
+                            client.Account.PrivLevel = 1;
+                        }
+                        break;
+
+                    case "heal":
+                        {
+                            List<string> tmp = new List<string>(args);
+                            tmp.RemoveAt(0);
+                            string[] newArgs = tmp.ToArray();
+                            HealCommandHandler sudoPlayer = new HealCommandHandler();
+                            sudoPlayer.OnCommand(client, newArgs);
+                            client.Account.PrivLevel = 1;
+                        }
+                        break;
+
+                    case "speed":
+                        {
+                            List<string> tmp = new List<string>(args);
+                            tmp.RemoveAt(0);
+                            string[] newArgs = tmp.ToArray();
+                            SpeedCommandHandler sudoPlayer = new SpeedCommandHandler();
+                            sudoPlayer.OnCommand(client, newArgs);
+                            client.Account.PrivLevel = 1;
+                        }
+                        break;
+
+                    case "jump":
+                        {
+                            List<string> tmp = new List<string>(args);
+                            tmp.RemoveAt(0);
+                            string[] newArgs = tmp.ToArray();
+                            JumpCommandHandler sudoPlayer = new JumpCommandHandler();
+                            sudoPlayer.OnCommand(client, newArgs);
+                            client.Account.PrivLevel = 1;
+                        }
+                        break;
+                }
             }
+
+            else
+                {
+                    client.Out.SendMessage("Command /sudo does not exist.", eChatType.CT_System, eChatLoc.CL_SystemWindow);
+                }
         }
     }
 }
