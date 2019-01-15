@@ -268,6 +268,7 @@
     <Compile Include="startup\script\CreationStartupEquipment.cs" />
     <Compile Include="startup\script\LevelUpRespec.cs" />
     <Compile Include="startup\script\StartAsBaseClass.cs" />
+    <Compile Include="SudoCommandHandler.cs" />
     <Compile Include="titles\GenericEventPlayerTitle.cs" />
     <Compile Include="titles\PrivilegedTitle.cs" />
     <Compile Include="titles\PvEKillsTitle.cs" />
@@ -277,16 +278,9 @@
     <Compile Include="titles\TimeBasedTitle.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="dbupdater" />
-    <Folder Include="dbupdater\insert" />
-    <Folder Include="dbupdater\replace" />
-    <Folder Include="dbupdater\unload" />
-    <Folder Include="titles" />
-    <Folder Include="startup" />
-    <Folder Include="startup\command" />
-    <Folder Include="startup\dataobject" />
-    <Folder Include="startup\command" />
-    <Folder Include="startup\script" />
+    <Folder Include="dbupdater\insert\" />
+    <Folder Include="dbupdater\replace\" />
+    <Folder Include="dbupdater\unload\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="quests\Albion\BaseFrederickPathPoints.xml" />

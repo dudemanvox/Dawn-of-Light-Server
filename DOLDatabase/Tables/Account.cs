@@ -43,6 +43,7 @@ namespace DOL
 			private string m_language;
 			private string m_lastClientVersion;
 			private bool m_isMuted;
+            private bool m_sudo; /// Added attribute to see if non-gm accounts can access gm commands
 			
 			/// <summary>
 			/// Create account row in DB
@@ -216,6 +217,16 @@ namespace DOL
 				get { return m_isMuted; }
 				set { Dirty = true; m_isMuted = value; }
 			}
+
+            /// <summary>
+            /// Is this account allowed to us GM commands without being a GM account?
+            /// </summary>
+            [DataElement(AllowDbNull = true)]
+            public bool IsSudo
+            {
+                get { return m_sudo; }
+                set { Dirty = true;  m_sudo = value; }
+            }
 
 			/// <summary>
 			/// List of characters on this account
